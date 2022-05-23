@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище LiteraryPleasureModelContainer" CdmEntityContainer="LiteraryPleasureEntities">
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="LiteraryPleasureModel.Book">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="Код_книги" ColumnName="Код_книги" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="LiteraryPleasureModel.Employee">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Изображение" ColumnName="Изображение" />
+          <ScalarProperty Name="Картинка" ColumnName="Картинка" />
+          <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+          <ScalarProperty Name="Код_должности" ColumnName="Код_должности" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+          <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+          <ScalarProperty Name="Дата_регистрации" ColumnName="Дата_регистрации" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Positions">
+      <EntityTypeMapping TypeName="LiteraryPleasureModel.Position">
+        <MappingFragment StoreEntitySet="Positions">
+          <ScalarProperty Name="Код_должности" ColumnName="Код_должности" />
+          <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Readers">
+      <EntityTypeMapping TypeName="LiteraryPleasureModel.Reader">
+        <MappingFragment StoreEntitySet="Readers">
+          <ScalarProperty Name="Код_читателя" ColumnName="Код_читателя" />
+          <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+          <ScalarProperty Name="Имя" ColumnName="Имя" />
+          <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+          <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+          <ScalarProperty Name="Паспорт" ColumnName="Паспорт" />
+          <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Realizations">
+      <EntityTypeMapping TypeName="LiteraryPleasureModel.Realization">
+        <MappingFragment StoreEntitySet="Realization">
+          <ScalarProperty Name="Код_реализации" ColumnName="Код_реализации" />
+          <ScalarProperty Name="Код_книги" ColumnName="Код_книги" />
+          <ScalarProperty Name="Код_читателя" ColumnName="Код_читателя" />
+          <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+          <ScalarProperty Name="Дата_выдачи" ColumnName="Дата_выдачи" />
+          <ScalarProperty Name="Дата_возврата" ColumnName="Дата_возврата" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="LiteraryPleasureModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

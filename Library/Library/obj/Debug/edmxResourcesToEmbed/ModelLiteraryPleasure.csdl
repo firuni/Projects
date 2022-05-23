@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LiteraryPleasureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Код_книги" />
+    </Key>
+    <Property Name="Код_книги" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Realizations" Relationship="Self.FK_Realization_Books" FromRole="Books" ToRole="Realization" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Код_сотрудника" />
+    </Key>
+    <Property Name="Код_сотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Код_должности" Type="Int32" />
+    <Property Name="Фамилия" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Имя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Отчество" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Телефон" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Дата_регистрации" Type="DateTime" Precision="0" />
+    <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Position" Relationship="Self.FK_Employees_Positions" FromRole="Employees" ToRole="Positions" />
+    <NavigationProperty Name="Realizations" Relationship="Self.FK_Realization_Employees" FromRole="Employees" ToRole="Realization" />
+    <Property Name="Картинка" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="Код_должности" />
+    </Key>
+    <Property Name="Код_должности" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Positions" FromRole="Positions" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Reader">
+    <Key>
+      <PropertyRef Name="Код_читателя" />
+    </Key>
+    <Property Name="Код_читателя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Фамилия" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Имя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Отчество" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Телефон" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Паспорт" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Адрес" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Realizations" Relationship="Self.FK_Realization_Readers" FromRole="Readers" ToRole="Realization" />
+  </EntityType>
+  <EntityType Name="Realization">
+    <Key>
+      <PropertyRef Name="Код_реализации" />
+    </Key>
+    <Property Name="Код_реализации" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Код_книги" Type="Int32" />
+    <Property Name="Код_читателя" Type="Int32" />
+    <Property Name="Код_сотрудника" Type="Int32" />
+    <Property Name="Дата_выдачи" Type="DateTime" Precision="0" />
+    <Property Name="Дата_возврата" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Realization_Books" FromRole="Realization" ToRole="Books" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Realization_Employees" FromRole="Realization" ToRole="Employees" />
+    <NavigationProperty Name="Reader" Relationship="Self.FK_Realization_Readers" FromRole="Realization" ToRole="Readers" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Realization_Books">
+    <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="Код_книги" />
+      </Principal>
+      <Dependent Role="Realization">
+        <PropertyRef Name="Код_книги" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employees_Positions">
+    <End Role="Positions" Type="Self.Position" Multiplicity="0..1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Positions">
+        <PropertyRef Name="Код_должности" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="Код_должности" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Realization_Employees">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="Код_сотрудника" />
+      </Principal>
+      <Dependent Role="Realization">
+        <PropertyRef Name="Код_сотрудника" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Realization_Readers">
+    <End Role="Readers" Type="Self.Reader" Multiplicity="0..1" />
+    <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Readers">
+        <PropertyRef Name="Код_читателя" />
+      </Principal>
+      <Dependent Role="Realization">
+        <PropertyRef Name="Код_читателя" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LiteraryPleasureEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Positions" EntityType="Self.Position" />
+    <EntitySet Name="Readers" EntityType="Self.Reader" />
+    <EntitySet Name="Realizations" EntityType="Self.Realization" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Realization_Books" Association="Self.FK_Realization_Books">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Realization" EntitySet="Realizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employees_Positions" Association="Self.FK_Employees_Positions">
+      <End Role="Positions" EntitySet="Positions" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Realization_Employees" Association="Self.FK_Realization_Employees">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Realization" EntitySet="Realizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Realization_Readers" Association="Self.FK_Realization_Readers">
+      <End Role="Readers" EntitySet="Readers" />
+      <End Role="Realization" EntitySet="Realizations" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

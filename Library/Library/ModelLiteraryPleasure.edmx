@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище LiteraryPleasureModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Код_книги" />
+          </Key>
+          <Property Name="Код_книги" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Код_сотрудника" />
+          </Key>
+          <Property Name="Код_сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_должности" Type="int" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="30" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="30" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="30" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="30" />
+          <Property Name="Дата_регистрации" Type="date" />
+          <Property Name="Пароль" Type="nvarchar" MaxLength="50" />
+          <Property Name="Картинка" Type="nvarchar" MaxLength="100" />
+          <Property Name="Изображение" Type="image" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Код_должности" />
+          </Key>
+          <Property Name="Код_должности" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Readers">
+          <Key>
+            <PropertyRef Name="Код_читателя" />
+          </Key>
+          <Property Name="Код_читателя" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="30" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="30" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="30" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="30" />
+          <Property Name="Паспорт" Type="nvarchar" MaxLength="30" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Realization">
+          <Key>
+            <PropertyRef Name="Код_реализации" />
+          </Key>
+          <Property Name="Код_реализации" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Код_книги" Type="int" />
+          <Property Name="Код_читателя" Type="int" />
+          <Property Name="Код_сотрудника" Type="int" />
+          <Property Name="Дата_выдачи" Type="date" />
+          <Property Name="Дата_возврата" Type="date" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Employees_Positions">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Код_должности" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Код_должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realization_Books">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+          <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Код_книги" />
+            </Principal>
+            <Dependent Role="Realization">
+              <PropertyRef Name="Код_книги" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realization_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Код_сотрудника" />
+            </Principal>
+            <Dependent Role="Realization">
+              <PropertyRef Name="Код_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realization_Readers">
+          <End Role="Readers" Type="Self.Readers" Multiplicity="0..1" />
+          <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Readers">
+              <PropertyRef Name="Код_читателя" />
+            </Principal>
+            <Dependent Role="Realization">
+              <PropertyRef Name="Код_читателя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище LiteraryPleasureModelContainer">
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Readers" EntityType="Self.Readers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Realization" EntityType="Self.Realization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_Positions" Association="Self.FK_Employees_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realization_Books" Association="Self.FK_Realization_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Realization" EntitySet="Realization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realization_Employees" Association="Self.FK_Realization_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Realization" EntitySet="Realization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realization_Readers" Association="Self.FK_Realization_Readers">
+            <End Role="Readers" EntitySet="Readers" />
+            <End Role="Realization" EntitySet="Realization" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LiteraryPleasureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Код_книги" />
+          </Key>
+          <Property Name="Код_книги" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Realizations" Relationship="Self.FK_Realization_Books" FromRole="Books" ToRole="Realization" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Код_сотрудника" />
+          </Key>
+          <Property Name="Код_сотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_должности" Type="Int32" />
+          <Property Name="Фамилия" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_регистрации" Type="DateTime" Precision="0" />
+          <Property Name="Пароль" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Employees_Positions" FromRole="Employees" ToRole="Positions" />
+          <NavigationProperty Name="Realizations" Relationship="Self.FK_Realization_Employees" FromRole="Employees" ToRole="Realization" />
+          <Property Name="Картинка" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Изображение" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Код_должности" />
+          </Key>
+          <Property Name="Код_должности" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Positions" FromRole="Positions" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="Код_читателя" />
+          </Key>
+          <Property Name="Код_читателя" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Паспорт" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Realizations" Relationship="Self.FK_Realization_Readers" FromRole="Readers" ToRole="Realization" />
+        </EntityType>
+        <EntityType Name="Realization">
+          <Key>
+            <PropertyRef Name="Код_реализации" />
+          </Key>
+          <Property Name="Код_реализации" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Код_книги" Type="Int32" />
+          <Property Name="Код_читателя" Type="Int32" />
+          <Property Name="Код_сотрудника" Type="Int32" />
+          <Property Name="Дата_выдачи" Type="DateTime" Precision="0" />
+          <Property Name="Дата_возврата" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_Realization_Books" FromRole="Realization" ToRole="Books" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Realization_Employees" FromRole="Realization" ToRole="Employees" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_Realization_Readers" FromRole="Realization" ToRole="Readers" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Realization_Books">
+          <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Код_книги" />
+            </Principal>
+            <Dependent Role="Realization">
+              <PropertyRef Name="Код_книги" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Positions">
+          <End Role="Positions" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Код_должности" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Код_должности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realization_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Код_сотрудника" />
+            </Principal>
+            <Dependent Role="Realization">
+              <PropertyRef Name="Код_сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realization_Readers">
+          <End Role="Readers" Type="Self.Reader" Multiplicity="0..1" />
+          <End Role="Realization" Type="Self.Realization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Readers">
+              <PropertyRef Name="Код_читателя" />
+            </Principal>
+            <Dependent Role="Realization">
+              <PropertyRef Name="Код_читателя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LiteraryPleasureEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Readers" EntityType="Self.Reader" />
+          <EntitySet Name="Realizations" EntityType="Self.Realization" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_Realization_Books" Association="Self.FK_Realization_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Realization" EntitySet="Realizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Positions" Association="Self.FK_Employees_Positions">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realization_Employees" Association="Self.FK_Realization_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Realization" EntitySet="Realizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realization_Readers" Association="Self.FK_Realization_Readers">
+            <End Role="Readers" EntitySet="Readers" />
+            <End Role="Realization" EntitySet="Realizations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище LiteraryPleasureModelContainer" CdmEntityContainer="LiteraryPleasureEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="LiteraryPleasureModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Код_книги" ColumnName="Код_книги" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="LiteraryPleasureModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Изображение" ColumnName="Изображение" />
+                <ScalarProperty Name="Картинка" ColumnName="Картинка" />
+                <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+                <ScalarProperty Name="Код_должности" ColumnName="Код_должности" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Дата_регистрации" ColumnName="Дата_регистрации" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="LiteraryPleasureModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="Код_должности" ColumnName="Код_должности" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Readers">
+            <EntityTypeMapping TypeName="LiteraryPleasureModel.Reader">
+              <MappingFragment StoreEntitySet="Readers">
+                <ScalarProperty Name="Код_читателя" ColumnName="Код_читателя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Паспорт" ColumnName="Паспорт" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Realizations">
+            <EntityTypeMapping TypeName="LiteraryPleasureModel.Realization">
+              <MappingFragment StoreEntitySet="Realization">
+                <ScalarProperty Name="Код_реализации" ColumnName="Код_реализации" />
+                <ScalarProperty Name="Код_книги" ColumnName="Код_книги" />
+                <ScalarProperty Name="Код_читателя" ColumnName="Код_читателя" />
+                <ScalarProperty Name="Код_сотрудника" ColumnName="Код_сотрудника" />
+                <ScalarProperty Name="Дата_выдачи" ColumnName="Дата_выдачи" />
+                <ScalarProperty Name="Дата_возврата" ColumnName="Дата_возврата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="LiteraryPleasureModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

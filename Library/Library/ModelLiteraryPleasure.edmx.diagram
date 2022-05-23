@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="214afbe2a6864b24b06d293922c8ac89" Name="Diagram1">
+        <EntityTypeShape EntityType="LiteraryPleasureModel.Book" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LiteraryPleasureModel.Employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LiteraryPleasureModel.Position" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LiteraryPleasureModel.Reader" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LiteraryPleasureModel.Realization" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LiteraryPleasureModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="LiteraryPleasureModel.FK_Realization_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="LiteraryPleasureModel.FK_Employees_Positions" ManuallyRouted="false" />
+        <AssociationConnector Association="LiteraryPleasureModel.FK_Realization_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="LiteraryPleasureModel.FK_Realization_Readers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,24 @@
+﻿<Window x:Class="Library.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="Литературное удовольствие" Icon="/Resources/logo.png" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#FF508350" Grid.ColumnSpan="2"></Grid>
+        <Grid Background="#FF75BD75" Grid.Row="2" Grid.ColumnSpan="2"></Grid>
+
+        <Image Source="/Resources/logo.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="50" Width="50"></Image>
+        <Label Content="Библиотека Литературное удовольствие" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontStyle="Italic" FontFamily="Segoe Print"></Label>
+        <Button x:Name="BtnBack" Content="Назад" HorizontalAlignment="Right" VerticalAlignment="Center" Width="80" Height="25" Style="{DynamicResource ButtonStyle}" Background="#FF75BD75" Margin="0, 0, 5, 0" Click="BtnBackClick"></Button>
+
+        <Frame x:Name="MainFrame" Grid.Row="1" Grid.ColumnSpan="2" NavigationUIVisibility="Hidden" Navigated="MainFrameNavigated"></Frame>
+    </Grid>
+</Window>

@@ -1,0 +1,50 @@
+﻿<Page x:Class="Library.Pages.EditEmployeesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Library.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditEmployeesPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Подсказки для ввода -->
+        <TextBlock Text="Должность" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14"></TextBlock>
+        <TextBlock Text="Фамилия" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14" Grid.Row="1"></TextBlock>
+        <TextBlock Text="Имя" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14" Grid.Row="2"></TextBlock>
+        <TextBlock Text="Отчество" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14" Grid.Row="3"></TextBlock>
+        <TextBlock Text="Телефон" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14" Grid.Row="4"></TextBlock>
+        <TextBlock Text="Пароль" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14" Grid.Row="5"></TextBlock>
+        <TextBlock Text="Картинка" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="14" Grid.Row="6"></TextBlock>
+
+        <!-- Элементы для ввода -->
+        <ComboBox x:Name="cBoxPosition" Height="25" Width="200" Grid.Column="1" HorizontalAlignment="Left" Margin="5" SelectedItem="{Binding Position}" DisplayMemberPath="Наименование"></ComboBox>
+        <TextBox Height="25" Width="200" Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" Margin="5" Text="{Binding Фамилия}"></TextBox>
+        <TextBox Height="25" Width="200" Grid.Column="1" Grid.Row="2"  HorizontalAlignment="Left" Margin="5" Text="{Binding Имя}"></TextBox>
+        <TextBox Height="25" Width="200" Grid.Column="1" Grid.Row="3"  HorizontalAlignment="Left" Margin="5" Text="{Binding Отчество}"></TextBox>
+        <TextBox Height="25" Width="200" Grid.Column="1" Grid.Row="4"  HorizontalAlignment="Left" Margin="5" Text="{Binding Телефон}"></TextBox>
+        <TextBox Height="25" Width="200" Grid.Column="1" Grid.Row="5"  HorizontalAlignment="Left" Margin="5" Text="{Binding Пароль}"></TextBox>
+        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <TextBox x:Name="imgName" Height="25" Width="200" Margin="5" Text="{Binding Картинка}"></TextBox>
+            <Image x:Name="imgPhoto"  Height="40" Width="40" Margin="10, 0, 10, 0"></Image>
+            <Button x:Name="UploadImage" Content="Загрузить" Height="25" Width="100" Style="{DynamicResource ButtonStyle}" Click="UploadImageClick"></Button>
+        </StackPanel>
+        <Button x:Name="BtnSave" Content="Сохранить" Grid.ColumnSpan="2" Grid.Row="7" Height="25" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource ButtonStyle}" Click="BtnSaveClick"></Button>
+    </Grid>
+</Page>
